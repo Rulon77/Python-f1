@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Lista de Pilotos</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:blue;">
+  Esta es la lista de pilotos
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nacionalidad</th>
+      </tr>
+      {% for piloto in pilotos %}
+      <tr>
+        <td>{{ piloto.nombre }}</td>
+        <td>{{ piloto.apellido }}</td>
+        <td>{{ piloto.nacionalidad }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock contenido %}

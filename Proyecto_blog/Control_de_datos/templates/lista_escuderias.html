@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Lista de Escuderias</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:orange;">
+  Escuderias
+</h1>
+<a href="{% url 'lista_escuderias' %}">Ver todas</a>
+<a href="{% url 'crear_escuderia' %}">Crear escuderia</a>
+<br><br>
+<form action="{% url 'buscar_escuderias' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="busqueda">
+  <input type="submit" value="Buscar escuderia">
+</form>
+<br>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Nombre</th>
+      <th>Nacionalidad</th>
+    </tr>
+    {% for escuderia in escuderias %}
+    <tr>
+      <td>{{ escuderia.nombre }}</td>
+      <td>{{ escuderia.nacionalidad }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Crear Escuderia</title>
+{% endblock titulo %}
+{% block contenido %}
+<h1 style="color:orange;">
+  Crea tu Escuderia
+</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+  <input class="btn btn-success" type="submit" value="Enviar escuderia" />
+</form>
+<br>
+<a href="{% url 'lista_escuderias' %}">Volver a la lista</a>
+{% endblock contenido %}

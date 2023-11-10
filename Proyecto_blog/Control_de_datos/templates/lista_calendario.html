@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Calendario</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:blue;">
+  Calendario
+</h1>
+ <br><br>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Nombre</th>
+        <th>Pais</th>
+        <th>Fecha</th>
+      </tr>
+      {% for calendario in calendario %}
+      <tr>
+        <td>{{ calendario.nombre }}</td>
+        <td>{{ calendario.pais }}</td>
+        <td>{{ calendario.fecha}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock contenido %}
