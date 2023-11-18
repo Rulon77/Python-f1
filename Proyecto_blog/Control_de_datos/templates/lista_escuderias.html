@@ -23,11 +23,22 @@
     <tr>
       <th>Nombre</th>
       <th>Nacionalidad</th>
+      <th></th>
+      <th></th>  
     </tr>
     {% for escuderia in escuderias %}
     <tr>
       <td>{{ escuderia.nombre }}</td>
       <td>{{ escuderia.nacionalidad }}</td>
+      <td>
+        <a class="btn btn-primary" href="{% url 'editar_escuderia' escuderia.id %}">editar</a>
+      </td>
+      <td>
+        <form action="{% url 'eliminar_escuderia' escuderia.id %}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta escuderia?');">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">eliminar</button>
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

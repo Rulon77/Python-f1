@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from .models import *
@@ -96,5 +98,42 @@ def buscar_escuderias(request):
         )
         return http_response
     
+def eliminar_escuderia(request, id):
+    # obtienes el curso de la base de datos
+    escuderia = Escuderias.objects.get(id=id)
+    if request.method == "POST":
+        # borra el curso de la base de datos
+        escuderia.delete()
+        # redireccionamos a la URL exitosa
+        url_exitosa = reverse('lista_escuderias')
+        return redirect(url_exitosa)    
 
+def editar_escuderia(request, id):
+    escuderia = Escuderias.objects.get(id=id)
+    if request.method == "POST":
+        # Actualizacion de datos
+        formulario = EscuderiaFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            # modificamos el objeto en memoria RAM
+            escuderia.nombre = data['nombre']
+            escuderia.nacionalidad = data['nacionalidad']
+            # Los cambios se guardan en la Base de datos
+            escuderia.save()
+
+            url_exitosa = reverse('lista_escuderias')
+            return redirect(url_exitosa)
+    else:  # GET
+        # Descargar formulario con data actual
+        inicial = {
+            'nombre': escuderia.nombre,
+            'nacionalidad': escuderia.nacionalidad,
+        }
+        formulario = EscuderiaFormulario(initial=inicial)
+    return render(
+        request=request,
+        template_name='formulario_escuderia.html',
+        context={'formulario': formulario},
+    )
     

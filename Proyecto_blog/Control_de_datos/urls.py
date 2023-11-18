@@ -10,4 +10,7 @@ urlpatterns = [
     path("buscarescuderias/", views.buscar_escuderias, name="buscar_escuderias"),
     path("crear_escuderia/", views.crear_escuderia, name="crear_escuderia"),
     path("crear_piloto/", views.crear_piloto, name="crear_piloto"),
+    path("eliminar-escuderia/<int:id>/", views.eliminar_escuderia, name="eliminar_escuderia"),
+    path("editar-escuderia/<int:id>/", views.editar_escuderia, name="editar_escuderia"),
+
 ]
