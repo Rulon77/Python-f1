@@ -26,4 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', saludar, name='inicio'),
     path('', include("Control_de_datos.urls")),
+    path('', include("Perfiles.urls")),
 ]
