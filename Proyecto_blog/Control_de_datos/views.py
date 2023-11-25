@@ -23,25 +23,21 @@ def lista_Calendario(request):
 @login_required
 def crear_escuderia(request):
     if request.method == "POST":
-        # Form data submission
+       
         formulario = EscuderiaFormulario(request.POST)
 
         if formulario.is_valid():
-            data = formulario.cleaned_data  # It's a dictionary
+            data = formulario.cleaned_data  
             nombre = data["nombre"]
             nacionalidad = data["nacionalidad"]
-
-            # Create a "Pilotos" object in memory
+          
             escuderia = Escuderias(nombre=nombre, nacionalidad=nacionalidad)
-            
-            # Save the object to the database
+        
             escuderia.save()
-
-            # Redirect the user to the list of "Pilotos"
+            
             url_exitosa = reverse('lista_escuderias')
             return redirect(url_exitosa)
-    else:  # GET request
-        # Render the initial form
+    else:  
         formulario = EscuderiaFormulario()
     
     http_response = render(

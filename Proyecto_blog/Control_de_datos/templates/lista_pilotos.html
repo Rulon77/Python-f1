@@ -5,7 +5,7 @@
 {% endblock titulo %}
 
 {% block contenido %}
-<h1 style="color:blue;">
+<h1 style="color:red;">
   Esta es la lista de pilotos
 </h1>
 <a href="{% url 'lista_pilotos' %}">Ver todos</a>
@@ -23,6 +23,16 @@
       <a href="{% url 'detalle_piloto' piloto.id %}">Leer más</a>
     </li>  
   </ul>
+  <td>
+    <a class="btn btn-primary" href="{% url 'editar_piloto' piloto.id %}">editar</a>
+  </td>
+  <td>
+    <form action="{% url 'eliminar_piloto' piloto.id %}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este piloto?');">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">eliminar</button>
+    </form>
+  </td>
+</tr>
 {% endfor %}
 {% endblock contenido %}
  
