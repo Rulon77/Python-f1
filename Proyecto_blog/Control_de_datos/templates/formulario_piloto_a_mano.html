@@ -3,15 +3,21 @@
 {% block titulo %}
 <title>F1 - Pilotos</title>
 {% endblock titulo %}
-<h1> Aqui podras crer tu piloto</h1>  
 
 {% block contenido %}
+<h1 style="color:orange;">
+  Crea tu Piloto
+</h1>
 <form method="post">
   {% csrf_token %}
-  <p>Nombre de piloto</p>
+  <p>Nombre</p>
   <input type="text" name="nombre">
-  <p>nacionalidad</p>
+  <p>Apellido</p>
+  <input type="text" name="apellido">
+  <p>Nacionalidad</p>
   <input type="text" name="nacionalidad">
+  <p>Biografia</p>
+  <textarea id="id_biografia" name="biografia"></textarea>
   <input type="submit" value="Enviar">
 </form>
 {% endblock contenido %}

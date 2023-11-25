@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -62,10 +62,11 @@ def crear_piloto(request):
             nombre = data["nombre"]
             apellido = data["apellido"]
             nacionalidad = data["nacionalidad"]
+            biografia = request.POST.get('biografia', '')
         
 
             # Create a "Pilotos" object in memory
-            piloto = Pilotos(nombre=nombre, apellido=apellido, nacionalidad=nacionalidad,)
+            piloto = Pilotos(nombre=nombre, apellido=apellido, nacionalidad=nacionalidad, biografia=biografia,)
             
             # Save the object to the database
             piloto.save()
@@ -79,7 +80,7 @@ def crear_piloto(request):
     
     http_response = render(
         request=request,
-        template_name='formulario_piloto.html',
+        template_name='formulario_piloto_a_mano.html',
         context={'formulario': formulario}
     )
     return http_response
@@ -150,21 +151,21 @@ def editar_piloto(request, id):
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            # modificamos el objeto en memoria RAM
             piloto.nombre = data['nombre']
             piloto.apellido = data['apellido']
             piloto.nacionalidad = data['nacionalidad']
-            # Los cambios se guardan en la Base de datos
+            piloto.biografia = data['biografia']
+            
             piloto.save()
 
             url_exitosa = reverse('lista_pilotos')
             return redirect(url_exitosa)
-    else:  # GET
-        # Descargar formulario con data actual
+    else:  
         inicial = {
             'nombre': piloto.nombre,
             'apellido': piloto.apellido,
             'nacionalidad': piloto.nacionalidad,
+            'biografia': piloto.biografia,
         }
         formulario = PilotoFormulario(initial=inicial)
     return render(
@@ -185,6 +186,8 @@ def eliminar_piloto(request, id):
         return redirect(url_exitosa)  
 
 def buscar_pilotos(request):
+
+
     if (request.method == "POST"):
         data = request.POST
         busqueda = data["busqueda"]
@@ -200,3 +203,7 @@ def buscar_pilotos(request):
         )
         return http_response    
        
+       
+def detalle_piloto(request, piloto_id):
+    piloto = get_object_or_404(Pilotos, pk=piloto_id)
+    return render(request, 'detalle_piloto.html', {'piloto': piloto})       

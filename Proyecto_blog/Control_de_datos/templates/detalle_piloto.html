@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Detalles del Piloto</title>
+{% endblock titulo %}
+
+{% block contenido %}
+  <h1 style="color: blue;">Detalles del Piloto</h1>
+  <p>Nombre: {{ piloto.nombre }}</p>
+  <p>Biografía: {{ piloto.biografia }}</p>
+  <!-- Otros detalles del piloto que desees mostrar -->
+{% endblock contenido %}
