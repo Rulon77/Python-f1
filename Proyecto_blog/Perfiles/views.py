@@ -12,15 +12,12 @@ from Perfiles.forms import UserRegisterForm, UserUpdateForm, AvatarFormulario
 
 def registro(request):
     if request.method == "POST":
-        # Guardado de datos
         formulario = UserRegisterForm(request.POST)
-
         if formulario.is_valid():
-            formulario.save()  # Esto lo puedo usar porque es un model form
+            formulario.save()  
             url_exitosa = reverse('inicio')
             return redirect(url_exitosa)
-    else:  # GET
-        # Descargar formulario inicial
+    else:   
         formulario = UserRegisterForm()
     return render(request=request, template_name='registro.html', context={'form': formulario},)
 
@@ -31,18 +28,18 @@ def login_view(request):
         form = AuthenticationForm(request, data=request.POST)
 
         if form.is_valid():
-            data = form.cleaned_data  # diccionario
+            data = form.cleaned_data
             usuario = data.get('username')
             password = data.get('password')
             user = authenticate(username=usuario, password=password)
-            # user puede ser un usuario o None
-            if user:  # Chequeo usario existe
-                login(request=request, user=user)  # creas la sesión al usuario
+            
+            if user:
+                login(request=request, user=user)
                 if next_url:
                     return redirect(next_url)
                 url_exitosa = reverse('inicio')
                 return redirect(url_exitosa)
-    else:  # GET
+    else:
         form = AuthenticationForm()
     return render(
         request=request,
@@ -66,20 +63,15 @@ class MiPerfilUpdateView(LoginRequiredMixin, UpdateView):
 
 def agregar_avatar(request):
     if request.method == "POST":
-        # Guardado de datos
-        formulario = AvatarFormulario(request.POST, request.FILES) # Aquí me llega toda la info del formulario html
+        formulario = AvatarFormulario(request.POST, request.FILES)
 
         if formulario.is_valid():
-            # creo avatar en base de datos
             avatar = formulario.save()
-            # vinculo al avatar con su usuario y guardo
             avatar.user = request.user
             avatar.save()
-            # Redirecciono al usuario a inicio
             url_exitosa = reverse('inicio')
             return redirect(url_exitosa)
-    else:  # GET
-        # Descargar formulario inicial
+    else:
         formulario = AvatarFormulario()
     return render(
         request=request,
