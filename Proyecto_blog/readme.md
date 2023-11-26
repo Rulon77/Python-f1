@@ -14,11 +14,20 @@ pip install -r requirements.txt
 username:Admin
 contraseña:Admin
 
-# Dentro de la Web
-+ Se podra crear piloto completando el formulario
-+ Se podra crear escuderias
-+ Busqueda de escuderias
-+ Ve lista de calendario
+# Dentro de la Web sin login
++ Se podra ver lista de pilos, biografia, lista de escuderias, calendario y "Sobre mi"
++ Busqueda de pilotos y escuderias
++ Completar formulario para creacion de usuario registrado
+
+# Dentro de la Web con login
++ Los mismos permisos del usuario no logeado
++ Se podra crear pilotos y escuderias completando el formulario
++ Edicion de pilotos y escuderias
++ Cargar un avatar a eleccion 
+
+# Dentro del Admin
++ Los mismo permisos que el usuario logeado
++ Crear pilotos y poder cargar una foto del mismo
 
 ## Instrucciones para entrar al panel aministrativo de Django
 + En consola, crear un superuser:
