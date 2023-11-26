@@ -7,12 +7,13 @@
 
 {% block contenido %}
 {% if user.is_authenticated %}
-  <h1>Bienvenido/a {{ user.last_name }}, {{ user.first_name }} Este es el blog de la F1 LATAM</h1>
+  <h1>Este es tu perfil!! {{ user.last_name }} {{ user.first_name }} </h1>
   <div>
-    <img src="{{ user.avatar.imagen.url }}" style="max-width: 20px;">
+    <img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;">
   </div>
 {% else %}
-  <h1>Bienvenido/a visitante</h1>
+  <h1>Bienvenido al blog de la F1 LATAM!</h1> 
+  <img src="/static/assets/Foto_inicio.jpg" alt="Mi Foto">
   <p>En este blog encontrarás toda la información sobre la actualidad de la F1. También puedes crear tu propio piloto y escudería, pero para eso debes registrarte aquí: >>>>
     <a class="btn btn-success" href="{% url 'registro' %}"> Registro </a>
   </p>

@@ -7,6 +7,7 @@ urlpatterns = [
     path('pilotos/', views.lista_pilotos, name='lista_pilotos'),
     path("escuderias/", views.lista_Escuderias, name="lista_escuderias"),
     path("calendario/", views.lista_Calendario, name="calendario"),
+    path('sobre_mi/', views.sobre_mi, name='sobre_mi'),
     
     
     #Escuderia

@@ -203,3 +203,6 @@ def buscar_pilotos(request):
 def detalle_piloto(request, piloto_id):
     piloto = get_object_or_404(Pilotos, pk=piloto_id)
     return render(request, 'detalle_piloto.html', {'piloto': piloto})       
+
+def sobre_mi(request):
+    return render(request, 'sobre_mi.html')

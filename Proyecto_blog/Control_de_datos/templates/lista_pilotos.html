@@ -5,8 +5,9 @@
 {% endblock titulo %}
 
 {% block contenido %}
-<h1 style="color:red;">
-  Esta es la lista de pilotos
+  <img src="/static/assets/Pilotos_2023.jpg" alt="Mi Foto" style="width: 1200px; height: 500px;">
+  <h1 style="color:red;">
+    Esta es la lista de pilotos
 </h1>
 <a href="{% url 'lista_pilotos' %}">Ver todos</a>
 <a href="{% url 'crear_piloto' %}">Crear piloto</a>
@@ -19,6 +20,11 @@
   <ul>
     <li>
       <p>{{ piloto.nombre }}</p>
+      {% if piloto.foto %}
+      <img src="{{ piloto.foto.url }}" alt="{{ piloto.nombre }}">
+    {% else %}
+      <p>No hay foto disponible para este piloto.</p>
+    {% endif %}
       <p>{{ piloto.biografia|truncatewords:5 }}</p>
       <a href="{% url 'detalle_piloto' piloto.id %}">Leer más</a>
     </li>  

@@ -15,6 +15,7 @@ class Pilotos(models.Model):
     nombre = models.CharField(max_length=256)
     nacionalidad = models.CharField(max_length=256)
     biografia = models.TextField(blank=True)
+    foto = models.ImageField(upload_to='pilotos_photos/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
