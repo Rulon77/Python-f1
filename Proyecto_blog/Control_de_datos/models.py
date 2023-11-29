@@ -5,6 +5,7 @@ class Escuderias(models.Model):
     # los atributos de clase (son las columnas de la tabla)
     nombre = models.CharField(max_length=64)
     nacionalidad = models.CharField(max_length=256)
+   
     
     def __str__(self):
         return f"{self.nombre} ({self.nacionalidad})"

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>F1 - Lista de Pilotos</title>
+{% endblock titulo %}
+
+{% block contenido %}
+  <img src="/static/assets/Pilotos_2023.jpg" alt="Mi Foto" style="width: 1200px; height: 500px;">
+  <h1 style="color:red;">
+    Esta es la lista de pilotos
+</h1>
+<a href="{% url 'lista_pilotos' %}">Ver todos</a>
+<a href="{% url 'crear_piloto' %}">Crear piloto</a>
+<br><br>
+<form action="{% url 'buscar_piloto' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="busqueda">
+  <input type="submit" value="Buscar piloto">
+</form>
+<br>
+{% for piloto in pilotos %}
+  <form method="post" action="{% url 'editar_piloto' piloto.id %}">
+    {% csrf_token %}
+  </form>
+  <br> 
+  <ul>
+    <li>
+      <p>{{ piloto.nombre }}</p>
+      <p>{{ piloto.apellido }}</p>
+      {% if piloto.foto %}
+      <img src="{{ piloto.foto.url }}" alt="{{ piloto.nombre }}">
+    {% else %}
+      <p>No hay foto disponible para este piloto.</p>
+    {% endif %}
+      <p>{{ piloto.biografia|truncatewords:5 }}</p>
+      <a href="{% url 'detalle_piloto' piloto.id %}">Leer más</a>
+    </li>  
+  </ul>
+  <td>
+    <a class="btn btn-primary" href="{% url 'editar_piloto' piloto.id %}">editar</a>
+  </td>
+  <td>
+    <form action="{% url 'eliminar_piloto' piloto.id %}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este piloto?');">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">eliminar</button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+{% endblock contenido %}
+ 
+
+  
